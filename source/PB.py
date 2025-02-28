@@ -4,12 +4,17 @@ import matplotlib.pyplot as plt
 pal = ["#001219","#005f73","#0a9396","#94d2bd","#e9d8a6","#ee9b00","#ca6702","#bb3e03","#ae2012","#9b2226"]
 plt.rcParams["axes.prop_cycle"] = plt.cycler('color', pal)
 plt.rcParams['lines.linewidth'] = 1.5
-font_path = 'Harding Text Web Regular Regular.ttf'
+font_path = 'source/Harding Text Web Regular Regular.ttf'
 font_prop = fm.FontProperties(fname=font_path,size=12, weight='bold')
 
 class PBchart:
     """ Class to create a radar chart with multiple categories and values.  
     """
+    def __new__(cls, *args, **kwargs):
+        instance = super().__new__(cls)
+        instance.__init__(*args, **kwargs)
+        return instance.chart()
+    
     def __init__(self, categories, values,upper,lower,legend,figsize=(8, 8),offsetcat=0,scale=None,minscale=None,median_lw=0.8,axis=None):
         self.categories = categories
         self.categories =  self.categories[-2:] +self.categories[:-2]
@@ -62,9 +67,6 @@ class PBchart:
         self.bar_angles2 = [np.array(self.bar_angles1)+i for i in self.angles[0:-1]]
         self.bar_angles = np.concatenate(self.bar_angles2)
 
-    def post_init(self):
-        self.chart
-
     def create_bar(self,angle, ax, values, color, width, order,hatching=None,alpha=1,edgecolor="black",lw=0.5,linestyle="-"):
         for idx, (angle, value) in enumerate(zip(angle, values)):
             if value < 0:
@@ -106,7 +108,6 @@ class PBchart:
                 ax.bar(angle + width * (order + 1 / 2), height, width=width, bottom=bottom,
                     color=color, edgecolor=edgecolor, linewidth=lw, linestyle=linestyle, alpha=alpha, hatch=hatching)
     
-    @property
     def chart(self):
         if self.axis==None:
             fig, ax = plt.subplots(figsize=self.figsize, subplot_kw=dict(polar=True))
@@ -187,7 +188,7 @@ class PBchart:
         ax.set_yticklabels([])
         legend_elements = [plt.Line2D([0], [0], color=j, lw=4, label=i) for i, j in zip(self.legend, pal[1:])]
         # ax.legend(handles=legend_elements, loc='upper center', bbox_to_anchor=(0.5,-0.1),prop=font_prop,frameon=False,ncol=3)
-
+        plt.close()
         if self.axis:
             return ax,legend_elements
         else:
