@@ -1,3 +1,11 @@
+# - Author: Michaël Lejeune⁺[a,b], Sami Kara [a,b], Michael Zwicky Hauschild [c]
+# - Code corresponding Author⁺email: m.lejeune@unsw.edu.au
+# - Affiliations: 
+
+    ## - a. Sustainability in Manufacturing and Life Cycle Engineering Research Group, School of Mechanical and Manufacturing Engineering, The University of New South Wales, Sydney 2052, Australia. 
+    ## - b. Australian Research Council, Training Centre for the Global Hydrogen Economy, Sydney 2052, Australia. 
+    ## - c. Centre for Absolute Sustainability, Technical University of Denmark, Kgs, Lyngby, Denmark.
+
 import numpy as np
 import matplotlib.font_manager as fm
 import matplotlib.pyplot as plt
