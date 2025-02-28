@@ -1,22 +1,15 @@
 import numpy as np
 import matplotlib.font_manager as fm
 import matplotlib.pyplot as plt
-pal = ["#001219","#005f73","#0a9396","#94d2bd","#e9d8a6","#ee9b00","#ca6702","#bb3e03","#ae2012","#9b2226"] #,"#E0E0E0"
-# pal=["#0a6969",
-#  "#208989",
-#  "#3da9a9",
-#  "#65c9c9",
-#  "#83ce9a",
-#  "#93c85e",
-#  "#72a73f",
-#  "#528726",
-#  "#326812"]
+pal = ["#001219","#005f73","#0a9396","#94d2bd","#e9d8a6","#ee9b00","#ca6702","#bb3e03","#ae2012","#9b2226"]
 plt.rcParams["axes.prop_cycle"] = plt.cycler('color', pal)
 plt.rcParams['lines.linewidth'] = 1.5
-font_path = '/Users/mickael/Library/Fonts/Harding Text Web Regular Regular.ttf' #Nature font, if you have it on your computer, you can download it if you want it
+font_path = 'Harding Text Web Regular Regular.ttf'
 font_prop = fm.FontProperties(fname=font_path,size=12, weight='bold')
 
-class PBchartm:
+class PBchart:
+    """ Class to create a radar chart with multiple categories and values.  
+    """
     def __init__(self, categories, values,upper,lower,legend,figsize=(8, 8),offsetcat=0,scale=None,minscale=None,median_lw=0.8,axis=None):
         self.categories = categories
         self.categories =  self.categories[-2:] +self.categories[:-2]
@@ -69,6 +62,8 @@ class PBchartm:
         self.bar_angles2 = [np.array(self.bar_angles1)+i for i in self.angles[0:-1]]
         self.bar_angles = np.concatenate(self.bar_angles2)
 
+    def post_init(self):
+        self.chart
 
     def create_bar(self,angle, ax, values, color, width, order,hatching=None,alpha=1,edgecolor="black",lw=0.5,linestyle="-"):
         for idx, (angle, value) in enumerate(zip(angle, values)):
